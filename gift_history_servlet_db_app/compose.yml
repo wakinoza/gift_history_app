@@ -3,7 +3,7 @@ services:
     image: mysql:8.4
     container_name: gift-db
     env_file:
-      - .env
+      -  ${ENV_FILE_PATH}
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
@@ -27,7 +27,7 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - .env
+      -  ${ENV_FILE_PATH}
     environment:
       DB_HOST: db
       SPRING_PROFILES_ACTIVE: prod

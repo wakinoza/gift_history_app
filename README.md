@@ -43,7 +43,7 @@
 
 ## 🚀 Dockerの起動手順
 
-Dockerがインストールされた環境であれば、環境の差異を受けず、以下の手順ですぐに動作確認が可能です。
+Docker DesktopがインストールされたWindows環境を想定しています。
 
 ### 1. リポジトリをクローン
 以下のコマンドを実行してください。
@@ -54,19 +54,36 @@ cd gift_history_app
 ```
 
 ### 2. 環境変数の準備
-.env.example をコピーして .env を作成し、必要な値を設定してください。（※ .env は .gitignore に登録され、安全に隠蔽されています）
+機密情報をリポジトリ外で管理するため、.env.example を参考に .env を作成してください。
+本プロジェクトでは、以下のパスに .env を配置する構成です。
 
-### 3. コンテナの起動
-compose.yml には healthcheck を導入しており、MySQLの完全な起動を待ってからSpring Bootが立ち上がる安全な順序制御を行っています。
-
-```bash
-docker compose up -d --build
+```text
+C:\Secrets\gift_app\.env
 ```
 
+.envのPATHを`start-compose.ps1`の$envFileに記述してください。
+
+
+### 3. コンテナの起動
+プロジェクトルートでDockerCompose起動用スクリプトを実行します。
+
+```bash
+.\start-compose.ps1
+```
+
+このスクリプトからDocker Composeを実行することで、プロジェクト外の.env の読み込みとコンテナの起動を行います。
+
 ### 4. アプリの確認
-ブラウザで「http://localhost:8080/login」 にアクセスしてください。
+ブラウザで「http://localhost:8080」 にアクセスしてください。
 
 ユーザー名：yamada / パスワード：yamada_password でログイン可能です。
+
+### 5. コンテナの停止
+コンテナの停止は、以下のコマンドを実行してください。
+
+```bash
+docker compose --env-file C:/Secrets/gift_app/.env down
+```
 
 ### 5. テストの実行（Maven）
 インメモリDBに自動接続され、ローカル環境を汚さずに高速にテストが実行されます。
