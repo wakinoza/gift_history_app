@@ -23,6 +23,14 @@ EC2上のTomcatとRDSを利用した構成から開始し、AWSサービスの�
 
 ✅ アプリケーション開発・ローカル環境構築
 
+✅ EC2・Tomcat・RDSへのデプロイ
+     - MavenによるWARビルド
+     - SFTPによるEC2への転送
+     - TomcatのWAR配置
+     - JNDI DataSourceの設定
+     - Secrets ManagerからのRDS認証情報の取得
+     - Tomcatの起動と動作確認
+
 ---
 
 ## 使用技術
@@ -30,7 +38,7 @@ EC2上のTomcatとRDSを利用した構成から開始し、AWSサービスの�
 ### Backend
 
 - Java 21
-- Spring Boot 4
+- Spring Boot 3.4.5
 - Maven
 
 ### Database
@@ -45,6 +53,16 @@ EC2上のTomcatとRDSを利用した構成から開始し、AWSサービスの�
 ### Container
 
 - Docker
+
+---
+## AWS構成
+- VPC、パブリックサブネット、プライベートサブネット
+- EC2（Amazon Linux 2023）
+- Tomcat 10
+- RDS for MySQL 8.4
+- IAMロール
+- Secrets Manager
+- Security Group
 
 ---
 
