@@ -40,7 +40,7 @@ public class SecurityConfig {
               String username = request.getParameter("username");
               log.warn("【SECURITY WARNING】ユーザー「{}」のログインに失敗しました。理由: {} IP: {}", username,
                   exception.getMessage(), request.getRemoteAddr());
-              response.sendRedirect(request.getContextPath() + "/login?logout");
+              response.sendRedirect(request.getContextPath() + "/login?error");
             }).permitAll())
 
         // 💡 ログアウト処理のログ
@@ -49,7 +49,7 @@ public class SecurityConfig {
               if (authentication != null) {
                 log.info("【SECURITY】ユーザー「{}」がログアウトしました。", authentication.getName());
               }
-              response.sendRedirect("/login?logout");
+              response.sendRedirect(request.getContextPath() + "/login?logout");
             }).invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll());
 
     return http.build();
